@@ -7,13 +7,12 @@ import { site } from "@/lib/site";
 import { products } from "@/lib/products";
 import { TalkButton } from "./Talk";
 import Cta from "./Cta";
+import Mark from "./Mark";
 
 export function Logo() {
   return (
     <Link href="/" className="logo" aria-label="Willowpack home">
-      <svg viewBox="0 0 28 28" width="22" height="22" aria-hidden>
-        <path d="M3 6l5.5 16L14 9l5.5 13L25 6" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinejoin="round" />
-      </svg>
+      <Mark size={18} />
       WILLOWPACK
     </Link>
   );

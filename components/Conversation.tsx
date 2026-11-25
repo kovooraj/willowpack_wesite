@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { type Lead, type Quote, md, money, newSessionId, sendToQuoteEngine } from "@/lib/quoteChat";
+import Mark from "./Mark";
 
 // Site-styled, fully conversational front end for the Willowpack AI quote engine.
 // The assistant asks one thing at a time (name, company, email, phone, format, product),
@@ -84,9 +85,7 @@ function loadLead(): Lead | null {
 function Avatar() {
   return (
     <span className="chat__ava" aria-hidden>
-      <svg viewBox="0 0 28 28" width="14" height="14">
-        <path d="M3 6l5.5 16L14 9l5.5 13L25 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
-      </svg>
+      <Mark size={9} />
     </span>
   );
 }
@@ -290,9 +289,7 @@ export default function Conversation({ preset, campaign = "website" }: { preset?
     <div className="convo chat">
       <header className="chat__head">
         <span className="chat__ava chat__ava--lg" aria-hidden>
-          <svg viewBox="0 0 28 28" width="18" height="18">
-            <path d="M3 6l5.5 16L14 9l5.5 13L25 6" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinejoin="round" />
-          </svg>
+          <Mark size={12} />
         </span>
         <div className="chat__who">
           <strong>Willowpack quote assistant</strong>
