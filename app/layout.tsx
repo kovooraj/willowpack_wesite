@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import "./globals.css";
-import { EMBED_SRC } from "@/components/QuoteBox";
 import { site } from "@/lib/site";
 import { TalkProvider } from "@/components/Talk";
 import { Nav, Footer, RevealObserver } from "@/components/Chrome";
@@ -32,7 +30,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
           <Footer />
           <RevealObserver />
-          <Script src={EMBED_SRC} strategy="afterInteractive" />
         </TalkProvider>
       </body>
     </html>

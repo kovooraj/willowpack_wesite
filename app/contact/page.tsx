@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/lib/site";
-import QuoteBox from "@/components/QuoteBox";
+import Conversation from "@/components/Conversation";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -17,8 +17,9 @@ export default function Contact() {
             Let's talk packaging.
           </h1>
           <p>
-            There's no long form to fill in. Tell our quote assistant what you're packaging and you'll see price breaks
-            in seconds. A Willowpack packaging specialist then finalizes the quote with you.
+            There's no long form to fill in. Share your details and what you're packaging, and our quote
+            assistant will put together pricing in a couple of minutes. A Willowpack packaging specialist reviews
+            every quote with you.
           </p>
           <dl>
             <div>
@@ -41,8 +42,8 @@ export default function Contact() {
             </div>
           </dl>
         </div>
-        <div>
-          <QuoteBox campaign="website-contact" />
+        <div className="convo-frame">
+          <Conversation campaign="website-contact" />
         </div>
       </div>
     </section>
