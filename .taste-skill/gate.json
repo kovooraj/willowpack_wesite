@@ -1,9 +1,9 @@
 {
  "start": "2026-11-25T03:15:05.795Z",
- "round": 2,
+ "round": 3,
  "idle": 0,
  "errors": 0,
- "status": "fail",
+ "status": "open",
  "history": [
   {
    "at": "2026-11-25T03:27:45.085Z",
@@ -22,6 +22,15 @@
    "round": 2,
    "reused": false,
    "stopHookActive": false
+  },
+  {
+   "at": "2026-11-25T03:51:32.888Z",
+   "mode": "manual",
+   "status": "open",
+   "fails": 4,
+   "round": 3,
+   "reused": false,
+   "stopHookActive": false
   }
  ],
  "max": 3,
@@ -37,18 +46,18 @@
   "by": "gate.mjs --start"
  },
  "manual": true,
- "roundKey": "5106d4fd99325998:a72b6dd1",
+ "roundKey": "0f0acb8fca772ccf:a72b6dd1",
  "roundFree": false,
  "idleFree": false,
  "blockKey": null,
- "fp": "5106d4fd99325998",
+ "fp": "0f0acb8fca772ccf",
  "page": "http://localhost:3123/",
  "found": {
   "fails": [
    {
     "check": "copy-headings",
-    "where": "div.wrap > div.proof > article.proof__item:nth-of-type(1) > h3 \"ROLL STOCK ON CALL\"",
-    "msg": "\"ROLL STOCK ON CALL\" names no product, part, place or section (3 headings like it; at most one brand line per page) (and 2 more like it: \"ROLL STOCK FOR A LAUNCH\", \"FOLDING CARTONS\")",
+    "where": "div.wrap > div.proof > article.proof__item:nth-of-type(1) > h3 \"Roll stock on call\"",
+    "msg": "\"Roll stock on call\" names no product, part, place or section (3 headings like it; at most one brand line per page) (and 2 more like it: \"Roll stock for a launch\", \"Folding cartons\")",
     "fix": "name the thing in every heading: the product, a part, the place or a section noun",
     "widths": [
      1440
@@ -58,7 +67,7 @@
      "copy-headings"
     ],
     "wheres": [
-     "div.wrap > div.proof > article.proof__item:nth-of-type(1) > h3 \"ROLL STOCK ON CALL\""
+     "div.wrap > div.proof > article.proof__item:nth-of-type(1) > h3 \"Roll stock on call\""
     ]
    },
    {
@@ -95,42 +104,74 @@
     ]
    },
    {
-    "check": "screen-height",
-    "where": "#products section.section.screen \"ProductsFive formats from one pl\"",
-    "msg": "2023px, 2.40 screens; a section is exactly one or two (--h), or on a phone at least one that its content fills",
-    "fix": "make the section exactly one or two screens (--h: 1 or 2)",
+    "check": "edge-right",
+    "where": "#products a.pcard.card \"Labels\"",
+    "msg": "ends at x 189; the right line is 374",
+    "fix": "end it on the .wrap right line",
     "widths": [
      390
     ],
     "from": "layout",
     "ids": [
-     "screen-height"
+     "edge-right"
     ],
     "wheres": [
-     "#products section.section.screen \"ProductsFive formats from one pl\""
+     "#products a.pcard.card \"Labels\""
     ]
    },
    {
-    "check": "neighbour",
-    "where": "#customers section.section.screen \"CustomersPackaging our customers\"",
-    "msg": "framed, 348px of the footer shows",
-    "fix": "keep the next section's heading and picture out of this screen",
+    "check": "edge-left",
+    "where": "#products a.pcard.card \"Folding Cartons\"",
+    "msg": "starts at x 201; the lines are 16 and the column starts",
+    "fix": "start it on the .wrap left line",
     "widths": [
      390
     ],
     "from": "layout",
     "ids": [
-     "neighbour"
+     "edge-left"
     ],
     "wheres": [
-     "#customers section.section.screen \"CustomersPackaging our customers\""
+     "#products a.pcard.card \"Folding Cartons\""
+    ]
+   },
+   {
+    "check": "edge-right",
+    "where": "#products a.pcard.card \"Pouches\"",
+    "msg": "ends at x 189; the right line is 374",
+    "fix": "end it on the .wrap right line",
+    "widths": [
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-right"
+    ],
+    "wheres": [
+     "#products a.pcard.card \"Pouches\""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "#products a.pcard.card \"Roll Stock\"",
+    "msg": "starts at x 201; the lines are 16 and the column starts",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "#products a.pcard.card \"Roll Stock\""
     ]
    }
   ],
   "warns": [
    {
     "check": "scroll-reveal",
-    "where": "section#process \"HOW AN ORDER RUNS From your artwork to a\"",
+    "where": "section#process \"How an order runs From your artwork to a\"",
     "msg": "starts \"opacity\" (0.4 s) the moment it is scrolled into view (an IntersectionObserver) on div.mo-ph__words (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
     "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
     "widths": [
@@ -141,7 +182,7 @@
    },
    {
     "check": "pinned",
-    "where": "section#process > div.wrap.mo-ph \"HOW AN ORDER RUNS From your artwork to a\"",
+    "where": "section#process > div.wrap.mo-ph \"How an order runs From your artwork to a\"",
     "msg": "held on screen for 3 screens of scroll (position: sticky) while the page moves on (inside a dealt moment's section, [data-moment]: expected on every kind, two moments at most, house rule; its still is judged under reduced motion)",
     "fix": "let the section scroll with the page",
     "widths": [
@@ -152,11 +193,12 @@
    },
    {
     "check": "card-layout",
-    "where": "section#products > div.wrap > div.pgrid \"LABELS\"",
+    "where": "section#products > div.wrap > div.pgrid \"Labels\"",
     "msg": "5 cards with 1 placement of their UI (vary them: rise, corner, a low stack, right)",
     "fix": "vary the cards of a group: at least three placements, and the ground in its own light on each",
     "widths": [
-     1440
+     1440,
+     390
     ],
     "from": "consistency"
    },
@@ -193,7 +235,7 @@
    {
     "check": "section-gaps",
     "where": "main > section.hero / section#products",
-    "msg": "123px between these sections, -32% against the median 180px",
+    "msg": "121px between these sections, -33% against the median 180px",
     "fix": "use one gap between sections (all within 25% of each other)",
     "widths": [
      1440,
@@ -204,7 +246,7 @@
    {
     "check": "section-gaps",
     "where": "section#process / section#who",
-    "msg": "152px between these sections, -50% against the median 305px of gaps at a change of ground",
+    "msg": "147px between these sections, -50% against the median 294px of gaps at a change of ground",
     "fix": "use one gap between sections (all within 25% of each other)",
     "widths": [
      1440,
@@ -215,7 +257,7 @@
    {
     "check": "section-gaps",
     "where": "section#who / section#customers",
-    "msg": "uneven space at the edge of a band: 227px outside its edge, 77px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
+    "msg": "uneven space at the edge of a band: 222px outside its edge, 72px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
     "fix": "use one gap between sections (all within 25% of each other)",
     "widths": [
      1440,
@@ -255,19 +297,9 @@
     "from": "consistency"
    },
    {
-    "check": "product-shown",
-    "where": "(the page)",
-    "msg": "no picture on this product page shows the packaging: its 11 pictures are \"Jars and bottles with matte paper labels\", \"Printed folding cartons in earth tones o\", \"Three matte stand-up pouches on a linen \", ...",
-    "fix": "show the packaging itself: the client's photographs, a render or a print object of it (assets/objects), never mood stock in its place",
-    "widths": [
-     1440
-    ],
-    "from": "consistency"
-   },
-   {
     "check": "empty-area",
-    "where": "section#customers \"PACKAGING OUR CUSTOMERS REORDER\"",
-    "msg": "43% of the section is empty: 96px above its first content, 96px under its last (cite), 17% beside content that covers under half the container, in its 728px of rows (WARN over 35%, FAIL over 50%)",
+    "where": "section#customers \"Packaging our customers reorder\"",
+    "msg": "42% of the section is empty: 96px above its first content, 96px under its last (cite), 16% beside content that covers under half the container, in its 728px of rows (WARN over 35%, FAIL over 50%)",
     "fix": "fill the section: a picture or a second column beside the words, or more of its own content; the section stays one or two screens tall (T-height)",
     "widths": [
      1440
@@ -315,16 +347,6 @@
     "from": "consistency"
    },
    {
-    "check": "section-air",
-    "where": "section#customers \"CustomersPackaging our customers reorder\"",
-    "msg": "the content fills 53.8% of the section's height (484 of 900px): 55% or more (40% WARN) (SR-3)",
-    "fix": "fill the section to 55%: more content, a picture or a background layer, or merge it into the section above as its last block",
-    "widths": [
-     1440
-    ],
-    "from": "consistency"
-   },
-   {
     "check": "button-styles",
     "where": "div.wrap > div.who > article.who__col:nth-of-type(1) > button.btn.btn--solid \"PLAN A SUPPLIER SWITCH\"",
     "msg": "on the phone 3 buttons run the full width of their column, but 2 keep their own width, like \"PLAN A SUPPLIER SWITCH\" is 257px of 358px: one action in two sizes",
@@ -337,7 +359,7 @@
    {
     "check": "photo-set",
     "where": "div.wrap > div.pgrid > a.pcard.card:nth-of-type(1) > img \"labels.jpg\"",
-    "msg": "12 photographs in more than one look: lightness from 0.40 to 0.78; saturation from 0.14 to 0.46; the odd one out is labels.jpg",
+    "msg": "12 photographs in more than one look: lightness from 0.40 to 0.79; the odd one out is labels.jpg",
     "fix": "grade the photographs to one look (light, colour, warmth), or replace the odd one out",
     "widths": [
      390
@@ -375,49 +397,81 @@
   ],
   "crashed": [],
   "seconds": {
-   "consistency": 110,
+   "consistency": 107,
    "layout": 13
   }
  },
  "open": [
   {
-   "check": "screen-height",
-   "where": "#products section.section.screen \"ProductsFive formats from one pl\"",
-   "msg": "2023px, 2.40 screens; a section is exactly one or two (--h), or on a phone at least one that its content fills",
-   "fix": "make the section exactly one or two screens (--h: 1 or 2)",
+   "check": "edge-right",
+   "where": "#products a.pcard.card \"Labels\"",
+   "msg": "ends at x 189; the right line is 374",
+   "fix": "end it on the .wrap right line",
    "widths": [
     390
    ],
    "from": "layout",
    "ids": [
-    "screen-height"
+    "edge-right"
    ],
    "wheres": [
-    "#products section.section.screen \"ProductsFive formats from one pl\""
+    "#products a.pcard.card \"Labels\""
    ]
   },
   {
-   "check": "neighbour",
-   "where": "#customers section.section.screen \"CustomersPackaging our customers\"",
-   "msg": "framed, 348px of the footer shows",
-   "fix": "keep the next section's heading and picture out of this screen",
+   "check": "edge-left",
+   "where": "#products a.pcard.card \"Folding Cartons\"",
+   "msg": "starts at x 201; the lines are 16 and the column starts",
+   "fix": "start it on the .wrap left line",
    "widths": [
     390
    ],
    "from": "layout",
    "ids": [
-    "neighbour"
+    "edge-left"
    ],
    "wheres": [
-    "#customers section.section.screen \"CustomersPackaging our customers\""
+    "#products a.pcard.card \"Folding Cartons\""
+   ]
+  },
+  {
+   "check": "edge-right",
+   "where": "#products a.pcard.card \"Pouches\"",
+   "msg": "ends at x 189; the right line is 374",
+   "fix": "end it on the .wrap right line",
+   "widths": [
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-right"
+   ],
+   "wheres": [
+    "#products a.pcard.card \"Pouches\""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "#products a.pcard.card \"Roll Stock\"",
+   "msg": "starts at x 201; the lines are 16 and the column starts",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "#products a.pcard.card \"Roll Stock\""
    ]
   }
  ],
  "waived": [
   {
    "check": "copy-headings",
-   "where": "div.wrap > div.proof > article.proof__item:nth-of-type(1) > h3 \"ROLL STOCK ON CALL\"",
-   "msg": "\"ROLL STOCK ON CALL\" names no product, part, place or section (3 headings like it; at most one brand line per page) (and 2 more like it: \"ROLL STOCK FOR A LAUNCH\", \"FOLDING CARTONS\")",
+   "where": "div.wrap > div.proof > article.proof__item:nth-of-type(1) > h3 \"Roll stock on call\"",
+   "msg": "\"Roll stock on call\" names no product, part, place or section (3 headings like it; at most one brand line per page) (and 2 more like it: \"Roll stock for a launch\", \"Folding cartons\")",
    "fix": "name the thing in every heading: the product, a part, the place or a section noun",
    "widths": [
     1440
@@ -427,7 +481,7 @@
     "copy-headings"
    ],
    "wheres": [
-    "div.wrap > div.proof > article.proof__item:nth-of-type(1) > h3 \"ROLL STOCK ON CALL\""
+    "div.wrap > div.proof > article.proof__item:nth-of-type(1) > h3 \"Roll stock on call\""
    ],
    "reason": "the customer cards are headed by the client's own product formats (roll stock, folding cartons, roll labels), which the checker's noun list does not include"
   },
@@ -467,6 +521,7 @@
    "reason": "the transparent nav deliberately sits over the full-bleed hero film (the client's Anduril-style brief); it turns solid on scroll"
   }
  ],
- "warnCount": 24,
- "at": "2026-11-25T03:43:57.774Z"
+ "warnCount": 22,
+ "at": "2026-11-25T03:51:32.888Z",
+ "openTold": true
 }

@@ -6,6 +6,9 @@ import { TalkButton } from "@/components/Talk";
 
 type Params = { params: Promise<{ slug: string }> };
 
+// "Many SKUs per run" → "many SKUs per run"; leaves acronyms ("HP Indigo") alone.
+const lowerFirst = (t: string) => (/^[A-Z][a-z]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t);
+
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
@@ -104,7 +107,7 @@ export default async function ProductPage({ params }: Params) {
             <div>
               <p className="eyebrow">Made in our plant</p>
               <h2 id="use-h" className="display display--md" style={{ marginTop: 14, maxWidth: "22ch" }}>
-                {p.capabilities[0]}, {p.capabilities[1].toLowerCase()}
+                {p.capabilities[0]}, {lowerFirst(p.capabilities[1])}
               </h2>
             </div>
             <Link href={`/products/${next.slug}`} className="link link--strong">

@@ -1,9 +1,3 @@
 {
-  "_note": "All media is committed in public/media. To add an ElevenLabs render, list \"name.ext\": \"<signed url>\" here and push: the Persist media action downloads it into public/media and commits it before the link expires.",
-  "tins-a.png": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/hRbgGXP2funT3xRCbm2E/dRA9kJEdo4nluZxijHbg/content.png?Expires=1795586400&KeyName=assets-cdn-key-1&Signature=1b__FSfmF9Bwtxvs_eZ1fbX1F00=",
-  "tins-b.png": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/ybKKGK4ap2UxjPk0yGyi/mWwCxO0jNz8ltSq9f9Y1/content.png?Expires=1795586400&KeyName=assets-cdn-key-1&Signature=7SDjvIJpxUR0B790RjUBsgxP7ms=",
-  "tins-line-a.png": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/6PoGcjmK2DhgnlbX50YV/XJY4i5Ju17BsZJOa4zWz/content.png?Expires=1795586400&KeyName=assets-cdn-key-1&Signature=oFyRJ1ioTWYj5HlUk0nT_rglgwU=",
-  "tins-line-b.png": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/XqQnpDuJ0T8ZqgPmzIv1/BjSpfeNeJ15dj6e8QeEl/content.png?Expires=1795586400&KeyName=assets-cdn-key-1&Signature=XmzKm1JgvAJVUmLkIg84b1Ddit4=",
-  "tins-stack-a.png": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/ptXDcGpYn3AWYb8B9wqM/2LfSNj489InQBfHV408Z/content.png?Expires=1795586400&KeyName=assets-cdn-key-1&Signature=G12IHFO-QgnDG-5-DWNTIzh0Ejw=",
-  "tins-stack-b.png": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/g5cKm4NKVmECQFk5640d/wHAWJcB9cqKFVC8iSTVN/content.png?Expires=1795586400&KeyName=assets-cdn-key-1&Signature=RXCd4vteX2b-Q8CPBZq9Ouf1nCs="
+  "_note": "All media is committed in public/media. To add an ElevenLabs render, list \"name.ext\": \"<signed url>\" here and push: the Persist media action downloads it into public/media and commits it before the link expires."
 }
