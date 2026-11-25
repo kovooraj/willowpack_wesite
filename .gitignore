@@ -6,3 +6,5 @@ node_modules
 .taste-skill/chrome-*
 .taste-skill/gate/
 shots/
+.taste-skill/*
+!.taste-skill/waivers.json
