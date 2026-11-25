@@ -69,6 +69,7 @@ export function Footer() {
   const withQuote = path !== "/contact";
   return (
     <footer className={`footer closing ${withQuote ? "" : "closing--links"}`} aria-labelledby={withQuote ? "quote-h" : undefined}>
+      {withQuote && <img className="closing__bg" src="/media/ch-prepress.jpg" alt="" aria-hidden="true" loading="lazy" />}
       <div className="wrap closing__wrap">
       {withQuote && <Cta />}
       <div className="footer__base">

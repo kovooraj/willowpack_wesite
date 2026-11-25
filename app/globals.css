@@ -1578,3 +1578,50 @@ html.m-enter .hero[data-enter] > .hero__bg { transform: scale(1.06); animation: 
 
 /* hero film: let the machinery read at the top; keep the text area dark enough to read */
 .hero::after { background: linear-gradient(180deg, rgba(20,17,14,.18) 0%, rgba(20,17,14,.28) 28%, rgba(20,17,14,.52) 45%, rgba(20,17,14,.9) 100%); }
+
+/* =========================================================
+   Headings: wider and tighter so they read as set type, not squeezed
+   ========================================================= */
+.display { font-stretch: 100%; font-weight: 600; letter-spacing: -0.035em; line-height: 1.02; }
+.display--xl { letter-spacing: -0.045em; line-height: .96; }
+.pcard__name, .proof__item h3, .h3, .chapters .mo-ph__head h2, .chapters.is-live .mo-ph__ch h3 { font-stretch: 100%; letter-spacing: -0.03em; }
+
+/* =========================================================
+   Closing: a factory photograph under an olive wash, the steps that follow,
+   and the quote chat as a raised card
+   ========================================================= */
+.footer.closing:not(.closing--links) { position: relative; overflow: hidden; background: #2f3524; isolation: isolate; }
+.closing__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.footer.closing:not(.closing--links)::before { content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(100deg, rgba(36,41,27,.96) 0%, rgba(43,49,32,.9) 42%, rgba(52,59,38,.72) 70%, rgba(52,59,38,.6) 100%); }
+.footer.closing:not(.closing--links) .cta.cta__inner { grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 96px); align-items: center; }
+.cta__copy { color: #f2ede4; }
+.cta__eyebrow { color: #cfc6b4 !important; }
+.cta__title { font-size: clamp(2.6rem, 4.6vw, 4.4rem); margin: 16px 0 18px; color: #f6f1e8; }
+.cta .cta__lead { margin: 0 0 32px; font-size: 1.15rem; line-height: 1.5; color: #e9e3d6; max-width: 34ch; }
+.cta__next { list-style: none; margin: 0 0 28px; padding: 0; border-top: 1px solid rgba(242,237,228,.22); }
+.cta__next li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid rgba(242,237,228,.22); }
+.cta__next strong { display: block; font-family: var(--display); font-weight: 600; font-size: 1.1rem; letter-spacing: -0.01em; color: #f6f1e8; margin-bottom: 2px; }
+.cta__next span:last-child { color: #ddd6c6; font-size: .98rem; line-height: 1.45; }
+.cta__num { font-family: var(--display); font-weight: 600; font-size: .8rem; letter-spacing: .1em; color: #e0a27f; padding-top: 4px; }
+.cta__mail { margin: 0; color: #ddd6c6; }
+.cta__mail .link { color: #f6f1e8; }
+.cta__card { background: var(--bone); border-radius: 8px; overflow: hidden; box-shadow: 0 40px 80px -40px rgba(0,0,0,.6), 0 2px 6px rgba(0,0,0,.15); }
+.cta__card-head { display: flex; align-items: center; gap: 12px; padding: 16px 20px; background: var(--ink); color: var(--bone); }
+.cta__card-head strong { display: block; font-size: .95rem; font-weight: 600; }
+.cta__card-head small { display: block; font-size: .8rem; color: #b9b0a0; }
+.cta__mark { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: var(--clay); color: #fff; flex: none; }
+.cta__card .convo-frame--cta { border: 0; height: min(500px, calc(100svh - var(--nav-h) - 280px)); min-height: 420px; }
+.cta__card .convo__steps { background: var(--bone); }
+.cta__card .bubble--wp { border-radius: 2px 12px 12px 12px; }
+.cta__card .bubble--you { border-radius: 12px 2px 12px 12px; }
+.closing .footer__base { border-top: 1px solid rgba(242,237,228,.22); }
+.closing .footer__base span, .closing .footer__links a { color: #e9e3d6; }
+@media (max-width: 860px) {
+  .footer.closing:not(.closing--links) .cta.cta__inner { grid-template-columns: 1fr; }
+  .footer.closing:not(.closing--links)::before { background: rgba(38,43,29,.92); }
+  .cta__card .convo-frame--cta { height: 720px; }
+}
+.cta__title { font-size: clamp(2.4rem, 3.7vw, 3.5rem); max-width: 13ch; }
+.cta__card .btn--solid:disabled { opacity: 1; background: color-mix(in oklab, var(--clay) 45%, var(--linen)); border-color: transparent; color: #fff; }
+.footer.closing:not(.closing--links) .cta { padding-top: calc(var(--nav-h) + 28px); }
