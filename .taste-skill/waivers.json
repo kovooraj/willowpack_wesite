@@ -1,0 +1,17 @@
+[
+  {
+    "check": "container-edges",
+    "target": "div.talk",
+    "reason": "the quote dialog is a modal overlay, hidden (visibility: hidden) until a Get a quote button opens it; it is not page content"
+  },
+  {
+    "check": "collide",
+    "target": "header.nav",
+    "reason": "the transparent nav deliberately sits over the full-bleed hero film (the client's Anduril-style brief); it turns solid on scroll"
+  },
+  {
+    "check": "copy-headings",
+    "target": "article.proof__item:nth-of-type(1) > h3",
+    "reason": "the customer cards are headed by the client's own product formats (roll stock, folding cartons, roll labels), which the checker's noun list does not include"
+  }
+]

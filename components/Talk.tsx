@@ -48,18 +48,21 @@ export function TalkProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function TalkButton({
-  children = "Start a project",
+  children = "Get a quote",
   preset,
   variant = "solid",
 }: {
   children?: React.ReactNode;
   preset?: Partial<Answers>;
-  variant?: "solid" | "ghost" | "light";
+  variant?: "solid" | "ghost" | "light" | "ghost-dark";
 }) {
   const start = useTalk();
   return (
     <button className={`btn btn--${variant}`} onClick={() => start(preset)}>
-      {children} <span aria-hidden>→</span>
+      {children}
+      <svg className="m-arrow" width="16" height="16" viewBox="0 0 18 18" aria-hidden>
+        <path d="M3 9h11M10 5l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.6" />
+      </svg>
     </button>
   );
 }

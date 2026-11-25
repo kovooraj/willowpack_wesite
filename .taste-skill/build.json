@@ -1,0 +1,11 @@
+{
+ "page": null,
+ "url": "http://localhost:3123/",
+ "root": null,
+ "kind": "product",
+ "category": "custom food and drink packaging",
+ "primary": "Get a quote",
+ "rounds": 3,
+ "start": "2026-11-25T03:15:05.795Z",
+ "by": "gate.mjs --start"
+}

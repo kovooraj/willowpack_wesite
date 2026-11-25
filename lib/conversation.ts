@@ -41,8 +41,8 @@ const formatDetail: Record<string, { ask: string; options: string[] }> = {
     options: ["VFFS (vertical)", "HFFS / flow wrap", "Stick pack", "Co-packer handles it", "Not sure"],
   },
   "Cut & stack can labels": {
-    ask: "Which can size?",
-    options: ["355 ml standard", "473 ml tallboy", "355 ml sleek", "250 ml slim", "Several sizes"],
+    ask: "What goes in the can, and which size?",
+    options: ["Vegetables or beans", "Tuna or fish", "Soup or sauce", "Several can sizes", "Not sure yet"],
   },
 };
 
