@@ -1811,7 +1811,7 @@ html.m-enter .hero[data-enter] > .hero__bg { transform: scale(1.06); animation: 
   .pstep { min-height: 0; opacity: 1; padding: 24px 0 40px; grid-template-columns: 40px 1fr; }
   .pstep::before { transform: scaleX(1); }
   .pstep__pic { display: block; grid-column: 1 / -1; margin: 0 0 20px; overflow: hidden; border-radius: var(--r-md); }
-  .pstep__pic img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+  .pstep__pic img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
 }
 
 /* ---- shared head row ---- */
