@@ -1625,3 +1625,21 @@ html.m-enter .hero[data-enter] > .hero__bg { transform: scale(1.06); animation: 
 .cta__title { font-size: clamp(2.4rem, 3.7vw, 3.5rem); max-width: 13ch; }
 .cta__card .btn--solid:disabled { opacity: 1; background: color-mix(in oklab, var(--clay) 45%, var(--linen)); border-color: transparent; color: #fff; }
 .footer.closing:not(.closing--links) .cta { padding-top: calc(var(--nav-h) + 28px); }
+
+/* ---- hero reel legend: the format on screen, lit, with its progress ---- */
+.hero .display--xl { font-size: clamp(3rem, 7.4vw, 7.2rem); }
+.reel { margin-top: 36px; }
+.reel ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; border-top: 1px solid rgba(242,237,228,.2); }
+.reel a { display: grid; grid-template-columns: auto 1fr; column-gap: 10px; align-items: baseline; padding: 14px 0 0; color: rgba(242,237,228,.5); transition: color var(--m-in) var(--m-ui); min-height: 44px; }
+.reel .reel__n { font-family: var(--display); font-size: .72rem; letter-spacing: .1em; }
+.reel .reel__name { font-family: var(--display); font-weight: 600; font-size: 1rem; letter-spacing: -0.01em; }
+.reel .reel__bar { grid-column: 1 / -1; display: block; height: 2px; margin-top: 12px; background: rgba(242,237,228,.14); overflow: hidden; }
+.reel .reel__bar span { display: block; height: 100%; background: var(--clay); transform-origin: left; transform: scaleX(0); }
+.reel li.is-on a { color: #f6f1e8; }
+.reel li.is-on .reel__n { color: #e0a27f; }
+@media (hover: hover) and (pointer: fine) { .reel a:hover { color: #f6f1e8; } }
+@media (max-width: 760px) {
+  .reel ol { grid-template-columns: 1fr; }
+  .reel li:not(.is-on) { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .reel .reel__bar span { transform: none !important; } }

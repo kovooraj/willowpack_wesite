@@ -1,3 +1,6 @@
 {
-  "_note": "All media is committed in public/media. To add an ElevenLabs render, list \"name.ext\": \"<signed url>\" here and push: the Persist media action downloads it into public/media and commits it before the link expires."
+  "_note": "All media is committed in public/media. To add an ElevenLabs render, list \"name.ext\": \"<signed url>\" here and push: the Persist media action downloads it into public/media and commits it before the link expires.",
+  "reel-2-labels-raw.mp4": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/qwjPTyActJBFPn4KJoCf/QxC8TzQgkYQCJZSIlnmC/content.mp4?Expires=1795590000&KeyName=assets-cdn-key-1&Signature=eHSUTvmxlAlRrcgZ_fy01NJbzrc=",
+  "reel-3-cartons-raw.mp4": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/zCnKuXqtQgk0jSjUBTF6/meRauEYSNoPmrKtIyHmr/content.mp4?Expires=1795590000&KeyName=assets-cdn-key-1&Signature=EsRj7WbuIZfQQBRL1Z1XpAWa6-g=",
+  "reel-4-pouches-raw.mp4": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/08WwgTSefkoJTeytRRK0/q2chdzAON5XTnrJNIHLw/content.mp4?Expires=1795590000&KeyName=assets-cdn-key-1&Signature=ftvEjMYKW4k4Z6hqIuj-MXgB4zY="
 }
