@@ -1,0 +1,131 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { site } from "@/lib/site";
+import { products } from "@/lib/products";
+import { TalkButton } from "./Talk";
+
+export function Logo() {
+  return (
+    <Link href="/" className="logo" aria-label="Willowpack home">
+      <svg viewBox="0 0 28 28" width="22" height="22" aria-hidden>
+        <path d="M3 6l5.5 16L14 9l5.5 13L25 6" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinejoin="round" />
+      </svg>
+      WILLOWPACK
+    </Link>
+  );
+}
+
+export function Nav() {
+  const path = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const overHero = path === "/" || path === "/about";
+
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 40);
+    on();
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  useEffect(() => setMenu(false), [path]);
+
+  return (
+    <header className={`nav ${scrolled || !overHero ? "nav--solid" : ""} ${menu ? "nav--menu" : ""}`}>
+      <div className="nav__inner">
+        <Logo />
+        <nav className="nav__links" aria-label="Primary">
+          {site.nav.map((n) => (
+            <Link key={n.href} href={n.href} className={path.startsWith(n.href) ? "is-active" : ""}>
+              {n.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="nav__cta">
+          <TalkButton variant="ghost">Start a project</TalkButton>
+        </div>
+        <button className="nav__burger" onClick={() => setMenu(!menu)} aria-label="Menu" aria-expanded={menu}>
+          <span />
+          <span />
+        </button>
+      </div>
+      <div className="nav__drawer">
+        {site.nav.map((n) => (
+          <Link key={n.href} href={n.href}>
+            {n.label}
+          </Link>
+        ))}
+        <TalkButton variant="light">Start a project</TalkButton>
+      </div>
+    </header>
+  );
+}
+
+export function Footer() {
+  return (
+    <footer className="footer">
+      <div className="wrap footer__top">
+        <div>
+          <Logo />
+          <p className="footer__line">{site.description}</p>
+        </div>
+        <div className="footer__cols">
+          <div>
+            <h4>Products</h4>
+            {products.map((p) => (
+              <Link key={p.slug} href={`/products/${p.slug}`}>
+                {p.name}
+              </Link>
+            ))}
+          </div>
+          <div>
+            <h4>Company</h4>
+            <Link href="/about">About</Link>
+            <Link href="/contact">Contact</Link>
+          </div>
+          <div>
+            <h4>Talk to us</h4>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+            {site.phone && <a href={`tel:${site.phone}`}>{site.phone}</a>}
+            <span>{site.location}</span>
+          </div>
+        </div>
+      </div>
+      <div className="wrap footer__base">
+        <span>© {new Date().getFullYear()} Willowpack</span>
+        <span>Made in Canada</span>
+      </div>
+    </footer>
+  );
+}
+
+export function Reveal({ children, className = "", as: Tag = "div" }: { children: React.ReactNode; className?: string; as?: "div" | "section" | "li" }) {
+  return <Tag className={`reveal ${className}`}>{children}</Tag>;
+}
+
+// Adds .is-in to .reveal elements as they scroll into view.
+export function RevealObserver() {
+  const path = usePathname();
+  useEffect(() => {
+    const els = document.querySelectorAll(".reveal:not(.is-in)");
+    if (!("IntersectionObserver" in window)) {
+      els.forEach((e) => e.classList.add("is-in"));
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add("is-in");
+            io.unobserve(en.target);
+          }
+        }),
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+    els.forEach((e) => io.observe(e));
+    return () => io.disconnect();
+  }, [path]);
+  return null;
+}
