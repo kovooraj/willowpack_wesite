@@ -35,17 +35,6 @@ export default function Cta() {
         </p>
       </div>
       <div className="cta__card">
-        <div className="cta__card-head">
-          <span className="cta__mark" aria-hidden>
-            <svg viewBox="0 0 28 28" width="18" height="18">
-              <path d="M3 6l5.5 16L14 9l5.5 13L25 6" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinejoin="round" />
-            </svg>
-          </span>
-          <span>
-            <strong>Willowpack quote assistant</strong>
-            <small>Pricing for labels, cartons, pouches, film and can labels</small>
-          </span>
-        </div>
         <div className="convo-frame convo-frame--cta">
           <Conversation campaign="website-cta" />
         </div>

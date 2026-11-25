@@ -25,6 +25,22 @@ function loadLead(): Lead | null {
   }
 }
 
+function Avatar() {
+  return (
+  <span className="chat__ava" aria-hidden>
+    <svg viewBox="0 0 28 28" width="14" height="14">
+      <path d="M3 6l5.5 16L14 9l5.5 13L25 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+    </svg>
+  </span>
+  );
+}
+const Wp = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <div className="chat__row chat__row--wp">
+    <Avatar />
+    <div className={`chat__bubble ${className}`}>{children}</div>
+  </div>
+);
+
 export default function Conversation({ preset, campaign = "website" }: { preset?: { format?: string; situation?: string }; campaign?: string }) {
   const [stage, setStage] = useState<"contact" | "product" | "chat">("contact");
   const [lead, setLead] = useState<Lead>(emptyLead);
@@ -104,33 +120,70 @@ export default function Conversation({ preset, campaign = "website" }: { preset?
     ask(t);
   };
 
+  const stepIdx = ["contact", "product", "chat"].indexOf(stage);
+  const stepName = ["Your details", "Your product", "Your quote"][stepIdx];
   return (
-    <div className="convo">
-      <div className="convo__steps" aria-hidden>
-        {["Your details", "Your product", "Quote"].map((s, i) => (
-          <span key={s} className={i <= ["contact", "product", "chat"].indexOf(stage) ? "is-on" : ""}>
-            <b>0{i + 1}</b> {s}
-          </span>
-        ))}
-      </div>
-
-      <div className="convo__log" ref={log} aria-live="polite">
-        <div className="bubble bubble--wp">
-          {returning && stage === "contact"
-            ? `Welcome back, ${lead.first_name}. Confirm your details and we'll pick up from there.`
-            : "Hi, I'm Willowpack's quote assistant. Start with your details, then the product, and I'll price it in a couple of minutes."}
+    <div className="convo chat">
+      <header className="chat__head">
+        <span className="chat__ava chat__ava--lg" aria-hidden>
+          <svg viewBox="0 0 28 28" width="18" height="18">
+            <path d="M3 6l5.5 16L14 9l5.5 13L25 6" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinejoin="round" />
+          </svg>
+        </span>
+        <div className="chat__who">
+          <strong>Willowpack quote assistant</strong>
+          <small>
+            Step {stepIdx + 1} of 3 · {stepName}
+          </small>
         </div>
+        <div className="chat__progress" aria-hidden>
+          <span style={{ transform: `scaleX(${(stepIdx + 1) / 3})` }} />
+        </div>
+      </header>
 
-        {stage !== "contact" && (
-          <div className="bubble bubble--you">
-            {lead.first_name} {lead.last_name} · {lead.company}
-            <br />
-            <span className="bubble__sub">{lead.email}</span>
+      <div className="chat__log" ref={log} aria-live="polite">
+        <Wp>
+          {returning && stage === "contact"
+            ? `Welcome back, ${lead.first_name}. Check your details below and we'll pick up from there.`
+            : "Hi, I'm Willowpack's quote assistant. Share a few details and what you're packaging, and I'll price it in a couple of minutes."}
+        </Wp>
+
+        {stage === "contact" && (
+          <div className="chat__row chat__row--wp chat__row--card">
+            <span className="chat__ava chat__ava--ghost" aria-hidden />
+            <form className="chat__card chat__form" onSubmit={submitContact}>
+              <label>First name<input required autoComplete="given-name" value={lead.first_name} onChange={(e) => setLead({ ...lead, first_name: e.target.value })} /></label>
+              <label>Last name<input autoComplete="family-name" value={lead.last_name} onChange={(e) => setLead({ ...lead, last_name: e.target.value })} /></label>
+              <label>Company<input required autoComplete="organization" value={lead.company} onChange={(e) => setLead({ ...lead, company: e.target.value })} /></label>
+              <label>Work email<input required type="email" autoComplete="email" value={lead.email} onChange={(e) => setLead({ ...lead, email: e.target.value })} /></label>
+              <label className="span2"><span>Phone <em>optional</em></span><input type="tel" autoComplete="tel" value={lead.phone} onChange={(e) => setLead({ ...lead, phone: e.target.value })} /></label>
+              <button className="chat__primary span2" type="submit" disabled={!nameOk}>
+                Continue
+                <svg width="16" height="16" viewBox="0 0 18 18" aria-hidden><path d="M3 9h11M10 5l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" /></svg>
+              </button>
+            </form>
           </div>
         )}
+
         {stage !== "contact" && (
-          <div className="bubble bubble--wp">
-            Thanks, {lead.first_name}. What are you packaging? Pick a format if you know it.
+          <div className="chat__row chat__row--you">
+            <div className="chat__bubble chat__bubble--you">
+              {lead.first_name} {lead.last_name} · {lead.company}
+              <span className="chat__sub">{lead.email}</span>
+            </div>
+          </div>
+        )}
+        {stage !== "contact" && <Wp>Thanks, {lead.first_name}. What are you packaging? Pick a format if you know it, then describe the product below.</Wp>}
+        {stage === "product" && (
+          <div className="chat__row chat__row--wp chat__row--card">
+            <span className="chat__ava chat__ava--ghost" aria-hidden />
+            <div className="chat__chips">
+              {FORMAT_CHIPS.map((f) => (
+                <button type="button" key={f} className={`chat__chip ${format === f ? "is-picked" : ""}`} onClick={() => setFormat(format === f ? "" : f)}>
+                  {f}
+                </button>
+              ))}
+            </div>
           </div>
         )}
 
@@ -138,112 +191,88 @@ export default function Conversation({ preset, campaign = "website" }: { preset?
           msgs.map((m, i) => {
             if (m.from === "you")
               return (
-                <div key={i} className="bubble bubble--you">
-                  {m.text}
+                <div key={i} className="chat__row chat__row--you">
+                  <div className="chat__bubble chat__bubble--you">{m.text}</div>
                 </div>
               );
             if (m.from === "quote")
               return (
-                <div key={i} className="qcard">
-                  <span className="eyebrow">Quote {m.quote.id}</span>
-                  <strong>{money(m.quote.discounted_total ?? m.quote.total, m.quote.currency)}</strong>
-                  <span>
-                    {m.quote.quantity ? `${Number(m.quote.quantity).toLocaleString("en-CA")} units` : ""}
-                    {m.quote.summary ? ` · ${m.quote.summary}` : ""}
-                  </span>
+                <div key={i} className="chat__row chat__row--wp chat__row--card">
+                  <span className="chat__ava chat__ava--ghost" aria-hidden />
+                  <div className="qcard">
+                    <span className="eyebrow">Quote {m.quote.id}</span>
+                    <strong>{money(m.quote.discounted_total ?? m.quote.total, m.quote.currency)}</strong>
+                    <span>
+                      {m.quote.quantity ? `${Number(m.quote.quantity).toLocaleString("en-CA")} units` : ""}
+                      {m.quote.summary ? ` · ${m.quote.summary}` : ""}
+                    </span>
+                  </div>
                 </div>
               );
             if (m.from === "error")
               return (
-                <div key={i} className="bubble bubble--wp bubble--err">
-                  That message didn't go through.{" "}
+                <Wp key={i} className="chat__bubble--err">
+                  That message didn&apos;t go through.{" "}
                   <button className="convo__link" onClick={() => retry(i, m.retry)}>
                     Send again
                   </button>
-                  <div className="bubble__sub">
-                    We already have your details, so a specialist can follow up at {lead.email} either way.
-                  </div>
-                </div>
+                  <span className="chat__sub">We already have your details, so a specialist can follow up at {lead.email} either way.</span>
+                </Wp>
               );
             const last = i === msgs.length - 1;
             return (
-              <div key={i} className="bubble bubble--wp bubble--md">
+              <Wp key={i} className="bubble--md">
                 <div dangerouslySetInnerHTML={{ __html: m.html }} />
                 {last && m.options && m.options.length > 0 && (
-                  <div className="chips chips--inline">
+                  <div className="chat__chips chat__chips--in">
                     {m.options.map((o) => (
-                      <button key={o.label} className={`chip ${o.rec ? "chip--rec" : ""}`} onClick={() => ask(o.label)} disabled={busy}>
+                      <button key={o.label} className={`chat__chip ${o.rec ? "chat__chip--rec" : ""}`} onClick={() => ask(o.label)} disabled={busy}>
                         {o.label}
                       </button>
                     ))}
                   </div>
                 )}
-              </div>
+              </Wp>
             );
           })}
 
         {busy && (
-          <div className="bubble bubble--wp bubble--typing" aria-label="Typing">
+          <Wp className="chat__typing">
             <i />
             <i />
             <i />
-          </div>
+          </Wp>
         )}
       </div>
 
-      <div className="convo__input">
-        {stage === "contact" && (
-          <form className="convo__contact" onSubmit={submitContact}>
-            <label>First name<input required autoComplete="given-name" value={lead.first_name} onChange={(e) => setLead({ ...lead, first_name: e.target.value })} /></label>
-            <label>Last name<input autoComplete="family-name" value={lead.last_name} onChange={(e) => setLead({ ...lead, last_name: e.target.value })} /></label>
-            <label>Company<input required autoComplete="organization" value={lead.company} onChange={(e) => setLead({ ...lead, company: e.target.value })} /></label>
-            <label>Work email<input required type="email" autoComplete="email" value={lead.email} onChange={(e) => setLead({ ...lead, email: e.target.value })} /></label>
-            <label className="span2">Phone (optional)<input type="tel" autoComplete="tel" value={lead.phone} onChange={(e) => setLead({ ...lead, phone: e.target.value })} /></label>
-            <button className="btn btn--solid span2" type="submit" disabled={!nameOk}>
-              Continue <span aria-hidden>→</span>
-            </button>
-          </form>
-        )}
-
-        {stage === "product" && (
-          <form
-            className="convo__product"
-            onSubmit={(e) => {
-              e.preventDefault();
+      {stage !== "contact" && (
+        <form
+          className="chat__composer"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (stage === "product") {
               if (text.trim() || format) startChat(text.trim());
-            }}
+            } else ask(text);
+          }}
+        >
+          <input
+            autoFocus
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder={stage === "product" ? "e.g. 10,000 stand-up pouches for our new granola" : "Reply…"}
+            aria-label={stage === "product" ? "What are you packaging?" : "Your reply"}
+            disabled={busy}
+          />
+          <button
+            className="chat__send"
+            type="submit"
+            aria-label={stage === "product" ? "Get my quote" : "Send"}
+            disabled={busy || (stage === "product" ? !text.trim() && !format : !text.trim())}
           >
-            <div className="chips">
-              {FORMAT_CHIPS.map((f) => (
-                <button type="button" key={f} className={`chip ${format === f ? "is-picked" : ""}`} onClick={() => setFormat(format === f ? "" : f)}>
-                  {f}
-                </button>
-              ))}
-            </div>
-            <div className="convo__text">
-              <input autoFocus value={text} onChange={(e) => setText(e.target.value)} placeholder="e.g. 10,000 stand-up pouches for our new granola" aria-label="What are you packaging?" />
-              <button className="btn btn--solid" type="submit" disabled={!text.trim() && !format}>
-                Get my quote <span aria-hidden>→</span>
-              </button>
-            </div>
-          </form>
-        )}
-
-        {stage === "chat" && (
-          <form
-            className="convo__text"
-            onSubmit={(e) => {
-              e.preventDefault();
-              ask(text);
-            }}
-          >
-            <input value={text} onChange={(e) => setText(e.target.value)} placeholder="Reply…" aria-label="Your reply" disabled={busy} />
-            <button className="btn btn--solid" type="submit" disabled={busy || !text.trim()}>
-              Send
-            </button>
-          </form>
-        )}
-      </div>
+            <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden><path d="M9 14V4M4.5 8.5 9 4l4.5 4.5" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </button>
+        </form>
+      )}
     </div>
   );
 }
