@@ -2,3 +2,9 @@ node_modules
 .next
 .vercel
 .env*
+*.tsbuildinfo
+.taste-skill/chrome-*
+.taste-skill/gate/
+shots/
+.taste-skill/*
+!.taste-skill/waivers.json

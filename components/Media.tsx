@@ -16,6 +16,6 @@ export function Img({ src, alt, className }: { src: string; alt: string; classNa
   return <img ref={ref} src={src} alt={alt} className={className} loading="lazy" onError={() => setOk(false)} />;
 }
 
-export function LoopVideo({ src, poster }: { src: string; poster?: string }) {
-  return <video src={src} poster={poster} autoPlay muted loop playsInline preload="metadata" aria-hidden />;
+export function LoopVideo({ src, poster, className }: { src: string; poster?: string; className?: string }) {
+  return <video className={className} src={src} poster={poster} autoPlay muted loop playsInline preload="metadata" aria-hidden />;
 }

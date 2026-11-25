@@ -1,109 +1,84 @@
 import type { Metadata } from "next";
-import { Reveal } from "@/components/Chrome";
-import { Img, LoopVideo } from "@/components/Media";
-import Cta from "@/components/Cta";
+import { LoopVideo } from "@/components/Media";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Willowpack is a Canadian packaging manufacturer making labels, cartons and flexible packaging in-house for food and beverage brands.",
+  description: "Willowpack is an Ontario packaging manufacturer that prints and converts labels, cartons and flexible packaging in-house for food and drink brands.",
 };
 
 const equipment = [
-  ["HP Indigo 18K, 200K & 6900", "Digital print for cartons, flexible packaging and labels"],
-  ["Heidelberg Speedmaster CX102 & XL Perfector", "Offset print with UV coating for higher volumes"],
+  ["HP Indigo 18K, 200K and 6900", "Digital print for cartons, flexible packaging and labels"],
+  ["Heidelberg Speedmaster CX102 and XL Perfector", "Offset print with UV coating for long runs"],
   ["Nordmeccanica Super Simplex", "Gloss, matte, soft-touch and high-barrier ALOx lamination"],
-  ["Totani & Karlville pouch makers", "Stand-up and lay-flat pouch converting"],
-  ["Karlville slitter", "Roll stock slit to width and wound to spec"],
+  ["Totani and Karlville pouch makers", "Stand-up and lay-flat pouch converting"],
+  ["Karlville slitter", "Roll stock slit to width and wound to your spec"],
   ["ABG Digilase", "Laser and rotary label die-cutting"],
   ["Diana Easy 115-C folder-gluer", "Carton folding and gluing"],
 ];
 
-const values = [
-  {
-    t: "Reliability",
-    d: "Packaging matters because it holds your launch dates and retail slots. We plan production around your calendar and tell you early if anything changes.",
-  },
-  {
-    t: "Craft",
-    d: "Colour, registration and finish are checked on every run, and your second order should match your first. Digital previews and physical samples come standard.",
-  },
-  {
-    t: "Partnership",
-    d: "We spend time understanding your product, your line and your retailers before we recommend anything, and then we help you work through the details.",
-  },
-];
-
+/* tasteskill plan (about)
+   hero: the press film, entrance once.
+   story: who we are beside the press operator photograph.
+   statement: moment word-highlight, the one idea that explains the business (no plates).
+   floor: the equipment list beside the shipping photograph.
+*/
 export default function About() {
   return (
     <>
-      <section className="hero hero--short">
-        <div className="hero__media">
-          <LoopVideo src="/media/press.mp4" poster="/media/press-poster.jpg" />
-        </div>
+      <section className="hero hero--short" data-enter>
+        <LoopVideo className="hero__bg" src="/media/press.mp4" poster="/media/press-poster.jpg" />
         <div className="wrap hero__content">
-          <span className="eyebrow" style={{ color: "rgba(242,237,228,.7)" }}>
+          <div className="hero-text">
+          <p className="eyebrow e-1" style={{ color: "rgba(242,237,228,.75)" }}>
             About Willowpack
-          </span>
+          </p>
           <h1 className="display display--xl" style={{ marginTop: 18 }}>
-            Made here.
-            <br />
-            Made right.
+            <span className="e-line">A packaging plant</span>
+            <span className="e-line">in Ontario</span>
           </h1>
+          </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="section screen" aria-labelledby="story-h">
         <div className="wrap twocol">
-          <Reveal>
-            <span className="eyebrow">Our story</span>
-            <h2 className="display display--md" style={{ margin: "18px 0 24px" }}>
-              A packaging manufacturer, not a broker.
+          <div>
+            <p className="eyebrow">Our story</p>
+            <h2 id="story-h" className="display display--md" style={{ margin: "14px 0 24px" }}>
+              We make the packaging we sell
             </h2>
             <p className="lede">
-              Willowpack was set up to fix a common problem for food and beverage brands: too many suppliers, long lead
-              times and large minimums that tie up cash.
+              Food and drink brands told us the same things: too many suppliers, six-week lead times and minimums that
+              tied up cash.
             </p>
             <p className="lede">
-              We bought the presses, laminators and converting lines and brought everything in-house. Because all print
-              is digital, there are no plates to make, so adding a new SKU or reordering a small run costs much less.
+              So we put the presses, the laminator, the die-cutters and the pouch makers in one building. Your order
+              moves from file to pallet without leaving it.
             </p>
-          </Reveal>
-          <Reveal>
-            <Img src="/media/facility.png" alt="A Willowpack press operator inspecting printed carton sheets" />
-          </Reveal>
+          </div>
+          <figure className="frame">
+            <img src="/media/facility.jpg" alt="A press operator inspecting printed carton sheets at a light table" width={1280} height={720} />
+          </figure>
         </div>
       </section>
 
-      <section className="section section--linen">
+      <section className="section section--linen statement screen" data-moment="word-highlight" aria-label="How we print">
         <div className="wrap">
-          <Reveal>
-            <span className="eyebrow">What we stand for</span>
-          </Reveal>
-          <div className="spacer" style={{ height: 40 }} />
-          <Reveal className="values">
-            {values.map((v, i) => (
-              <div key={v.t}>
-                <span className="eyebrow">0{i + 1}</span>
-                <h3 className="display display--md">{v.t}</h3>
-                <p>{v.d}</p>
-              </div>
-            ))}
-          </Reveal>
+          <p className="eyebrow">How we print</p>
+          <p className="mo-wh__text">
+            Our presses print without plates. A new flavour, a seasonal label or a corrected typo is a new file, so a
+            short run costs what it should and <strong>your reorder matches</strong> the last one.
+          </p>
         </div>
       </section>
 
-      <section className="section section--ink">
+      <section className="section section--ink screen" aria-labelledby="floor-h">
         <div className="wrap twocol" style={{ alignItems: "start" }}>
-          <Reveal>
-            <span className="eyebrow">The floor</span>
-            <h2 className="display display--lg" style={{ marginTop: 18 }}>
-              Our own equipment.
+          <div>
+            <p className="eyebrow">The equipment</p>
+            <h2 id="floor-h" className="display display--md" style={{ margin: "14px 0 32px" }}>
+              What runs on our floor
             </h2>
-            <p className="lede" style={{ marginTop: 24 }}>
-              Every format runs on equipment we own and operate, from the first print to the finished pallet.
-            </p>
-          </Reveal>
-          <Reveal>
             <ul className="equip">
               {equipment.map(([k, v]) => (
                 <li key={k}>
@@ -112,11 +87,13 @@ export default function About() {
                 </li>
               ))}
             </ul>
-          </Reveal>
+          </div>
+          <figure className="frame frame--tall">
+            <img src="/media/ch-ship.jpg" alt="A wrapped pallet of cartons and a pallet of film rolls at the loading dock" loading="lazy" width={1280} height={720} />
+          </figure>
         </div>
       </section>
 
-      <Cta />
     </>
   );
 }

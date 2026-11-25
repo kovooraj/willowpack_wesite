@@ -1,194 +1,161 @@
 import Link from "next/link";
-import { products } from "@/lib/products";
-import { stats, proof } from "@/lib/site";
+import { proof } from "@/lib/site";
 import { TalkButton } from "@/components/Talk";
-import { Reveal } from "@/components/Chrome";
-import { Img, LoopVideo } from "@/components/Media";
-import Cta from "@/components/Cta";
+import { LoopVideo } from "@/components/Media";
+import ProductGrid from "@/components/ProductGrid";
+
+/* tasteskill plan
+   kind: product (site-kind other). Main action: Get a quote.
+   deal: own brand palette (bone, linen, clay, olive on espresso ink): earth tones for food packaging; Archivo + Inter.
+   hero: film (client video), entrance once on load.
+   products: the five formats as photographs, two large over three.
+   how-it-runs: moment photo-chapters, four steps of one order shown in the space of one screen.
+   who: two buyers, each with its photograph.
+   proof: customers by name, no figures invented.
+   close: the quote conversation.
+*/
+const chapters = [
+  {
+    img: "/media/ch-prepress.jpg",
+    alt: "Hands checking a carton proof beside a fan of colour swatches",
+    title: "Prepress and proofing",
+    text: "We check your dieline, fonts and colour, then send a digital proof. Physical samples are available before you approve.",
+  },
+  {
+    img: "/media/ch-press.jpg",
+    alt: "A press operator lifting a printed sheet of carton layouts",
+    title: "Printing",
+    text: "HP Indigo presses print without plates, so a new SKU is a new file. Long carton runs move to our Heidelberg offset press.",
+  },
+  {
+    img: "/media/ch-finish.jpg",
+    alt: "Glued cartons leaving the folder-gluer on a conveyor",
+    title: "Finishing",
+    text: "Lamination, die-cutting, folding and gluing, slitting and pouch making all run on equipment in our building.",
+  },
+  {
+    img: "/media/ch-ship.jpg",
+    alt: "A wrapped pallet of cartons and a pallet of film rolls at the loading dock",
+    title: "Packing and shipping",
+    text: "Packed by version and labelled for your receiving team. Roll stock can stay with us and ship the next business day you call for it.",
+  },
+];
 
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <section className="hero">
-        <div className="hero__media">
-          <LoopVideo src="/media/hero.mp4" poster="/media/hero-poster.jpg" />
-        </div>
+      <section className="hero" data-enter>
+        <LoopVideo className="hero__bg" src="/media/hero.mp4" poster="/media/hero-poster.jpg" />
         <div className="wrap hero__content">
-          <span className="eyebrow" style={{ color: "rgba(242,237,228,.7)" }}>
-            Labels · Cartons · Pouches · Roll stock · Can labels
-          </span>
+          <div className="hero-text">
+          <p className="eyebrow e-1" style={{ color: "rgba(242,237,228,.75)" }}>
+            Willowpack · Ontario packaging manufacturer
+          </p>
           <h1 className="display display--xl" style={{ marginTop: 18 }}>
-            Packaging,
-            <br />
-            made with
-            <br />
-            precision.
+            <span className="e-line">Packaging</span>
+            <span className="e-line">for food and</span>
+            <span className="e-line">drink brands</span>
           </h1>
           <div className="hero__grid">
-            <p>
-              Willowpack prints and converts packaging for food and beverage brands that can't afford to miss a shelf date.
-              Everything is digital and made in-house, so turnarounds are fast and the quality holds from run to run.
+            <p className="e-2">
+              Labels, folding cartons, pouches, roll stock and can labels, printed and converted in our own plant. Most
+              orders ship in about 5 business days.
             </p>
-            <div className="hero__actions">
-              <TalkButton variant="light" />
+            <div className="hero__actions e-3">
+              <TalkButton variant="light">Get a quote</TalkButton>
               <Link href="/products" className="btn btn--ghost">
-                Explore products
+                See the five formats
               </Link>
             </div>
+          </div>
           </div>
         </div>
       </section>
 
-      <div className="strip" aria-hidden>
-        <div className="strip__track">
-          {[0, 1].map((k) =>
-            ["HP Indigo digital print", "In-house lamination", "Pouch converting", "Laser die-cutting", "Fold & glue", "Managed inventory", "Made in Canada"].map(
-              (t) => <span key={`${k}-${t}`}>{t}</span>,
-            ),
-          )}
-        </div>
-      </div>
-
-      {/* Statement */}
-      <section className="section">
+      <section className="section screen products-sec" id="products" aria-labelledby="products-h">
         <div className="wrap">
-          <Reveal className="statement">
-            <span className="eyebrow">01 · Why Willowpack</span>
-            <div>
-              <h2 className="display display--lg">Fewer suppliers. Fewer surprises. Better packaging.</h2>
-              <p className="lede" style={{ marginTop: 28 }}>
-                We print, laminate, cut, fold and convert in our own facility. Fewer hand-offs means fewer delays, and
-                there are no plate costs when you add a SKU.
+          <div className="head-block">
+            <p className="eyebrow">Products</p>
+            <h2 id="products-h" className="display display--md" style={{ marginTop: 14 }}>
+              Five formats from one plant
+            </h2>
+            <p className="lede">Buy cartons, labels and film from one supplier, and the colour matches across all of them.</p>
+          </div>
+          <ProductGrid />
+        </div>
+      </section>
+
+      <section className="section chapters" id="process" data-moment="photo-chapters" aria-labelledby="process-h">
+        <div className="wrap mo-ph">
+          <div className="mo-ph__head">
+            <h2 id="process-h">How an order runs</h2>
+            <p>From your artwork to a pallet at your dock, every step happens in our building.</p>
+          </div>
+          <ol className="mo-ph__list">
+            {chapters.map((c) => (
+              <li className="mo-ph__ch" key={c.title}>
+                <figure className="mo-ph__pic">
+                  <img src={c.img} alt={c.alt} width={1280} height={720} loading="lazy" />
+                </figure>
+                <h3>{c.title}</h3>
+                <p>{c.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="section section--linen screen" id="who" aria-labelledby="who-h">
+        <div className="wrap">
+          <p className="eyebrow">Who we work with</p>
+          <h2 id="who-h" className="display display--md" style={{ margin: "14px 0 32px", maxWidth: "22ch" }}>
+            Brands with growing product lines
+          </h2>
+          <div className="who">
+            <article className="who__col">
+              <Link href="/products/folding-cartons" className="frame m-zoom" aria-label="Folding cartons">
+                <img src="/media/cartons-detail.jpg" alt="A stack of die-cut carton blanks ready to fold" loading="lazy" />
+              </Link>
+              <h3 className="h3">Packaging for a multi-SKU range</h3>
+              <p>
+                Operations and purchasing teams who ship to retail across many products. Put cartons, labels and
+                flexible packaging with one supplier, and let us hold stock so you order what you need.
               </p>
-            </div>
-          </Reveal>
-          <Reveal className="stats">
-            {stats.map((s) => (
-              <div className="stat" key={s.label}>
-                <div className="stat__value">{s.value}</div>
-                <div className="stat__unit">{s.unit}</div>
-                <p>{s.label}</p>
-              </div>
-            ))}
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Who we build for — Tier A / Tier B */}
-      <section className="section section--ink">
-        <div className="wrap">
-          <Reveal>
-            <span className="eyebrow">02 · Who we work with</span>
-            <h2 className="display display--lg" style={{ marginTop: 18, maxWidth: "16ch" }}>
-              Built for brands with growing SKU lists.
-            </h2>
-          </Reveal>
-          <Reveal className="split">
-            <div className="split__col">
-              <span className="eyebrow">Scaling portfolios</span>
-              <h3 className="h3">Keep packaging running smoothly as your SKU count grows.</h3>
-              <p>For operations and procurement teams managing retail distribution across many products.</p>
-              <ul>
-                <li>Combine cartons, labels and flexible packaging with one supplier</li>
-                <li>Consistent production that keeps retail shelves stocked</li>
-                <li>Managed inventory: we hold stock and ship the next business day</li>
-                <li>Order what you need, without carrying excess packaging</li>
-              </ul>
-              <TalkButton variant="light" preset={{ situation: "Consolidating suppliers" }}>
-                Simplify my packaging
+              <TalkButton variant="solid" preset={{ situation: "Consolidating suppliers" }}>
+                Plan a supplier switch
               </TalkButton>
-            </div>
-            <div className="split__col">
-              <span className="eyebrow">Launching & growing</span>
-              <h3 className="h3">Launch new products without packaging risk.</h3>
-              <p>For founders and brand leads bringing new SKUs to market.</p>
-              <ul>
-                <li>Low minimums, so you can test a SKU without tying up cash</li>
-                <li>Packaging in days, so your launch date holds</li>
-                <li>Retail-ready quality from your first order</li>
-                <li>A specialist who works through the details with you, beyond the quote</li>
-              </ul>
-              <TalkButton variant="ghost" preset={{ situation: "Launching a new product" }}>
-                Plan my launch
+            </article>
+            <article className="who__col">
+              <Link href="/products/pouches" className="frame m-zoom" aria-label="Pouches">
+                <img src="/media/pouches-hand.jpg" alt="A coffee pouch and a snack pouch held up in sunlight" loading="lazy" />
+              </Link>
+              <h3 className="h3">Packaging for a product launch</h3>
+              <p>
+                Founders and brand leads bringing a product to shelf. Small first runs, packaging in days, and a
+                specialist who checks the details with you before anything prints.
+              </p>
+              <TalkButton variant="solid" preset={{ situation: "Launching a new product" }}>
+                Plan a launch
               </TalkButton>
-            </div>
-          </Reveal>
+            </article>
+          </div>
         </div>
       </section>
 
-      {/* Products */}
-      <section className="section">
+      <section className="section screen" id="customers" aria-labelledby="customers-h">
         <div className="wrap">
-          <Reveal className="section-head">
-            <div>
-              <span className="eyebrow">03 · Products</span>
-              <h2 className="display display--lg" style={{ marginTop: 18 }}>
-                Five formats.
-                <br />
-                One partner.
-              </h2>
-            </div>
-            <Link href="/products" className="link-arrow">
-              All products →
-            </Link>
-          </Reveal>
-          <ul className="plist">
-            {products.map((p, i) => (
-              <Reveal as="li" key={p.slug}>
-                <Link href={`/products/${p.slug}`} className="prow">
-                  <span className="prow__n">0{i + 1}</span>
-                  <span className="prow__name">{p.name}</span>
-                  <p>{p.short}</p>
-                  <div className="prow__img">
-                    <Img src={p.image} alt="" />
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Manufacturing band */}
-      <section className="band">
-        <LoopVideo src="/media/press.mp4" poster="/media/press-poster.jpg" />
-        <div className="wrap">
-          <Reveal>
-            <span className="eyebrow" style={{ color: "rgba(242,237,228,.7)" }}>
-              04 · Manufacturing
-            </span>
-            <h2 className="display display--lg" style={{ margin: "18px 0 24px" }}>
-              Everything made under one roof.
-            </h2>
-            <p>
-              HP Indigo digital presses, Heidelberg offset, Nordmeccanica lamination, Totani pouch making and laser
-              die-cutting. Your packaging never leaves our facility until it ships to you.
-            </p>
-            <div className="spacer" />
-            <Link href="/about" className="btn btn--light">
-              How we work <span aria-hidden>→</span>
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Proof */}
-      <section className="section section--linen">
-        <div className="wrap">
-          <Reveal className="section-head">
-            <div>
-              <span className="eyebrow">05 · In practice</span>
-              <h2 className="display display--lg" style={{ marginTop: 18 }}>
-                Brands that count on us.
-              </h2>
-            </div>
-          </Reveal>
-          <Reveal className="proof">
+          <p className="eyebrow">Customers</p>
+          <h2 id="customers-h" className="display display--md" style={{ margin: "14px 0 32px", maxWidth: "22ch" }}>
+            Packaging our customers reorder
+          </h2>
+          <div className="proof">
             {proof.map((p) => (
               <article className="proof__item" key={p.client}>
-                <span className="eyebrow">{p.format}</span>
-                <h3>{p.client}</h3>
+                <Link href={p.href} className="proof__thumb m-zoom" aria-label={p.product}>
+                  <img src={p.thumb} alt="" loading="lazy" />
+                </Link>
+                <h3>{p.heading}</h3>
+                <p className="proof__client">{p.client}</p>
                 <p>{p.story}</p>
                 {p.quote && (
                   <blockquote>
@@ -197,11 +164,10 @@ export default function Home() {
                 )}
               </article>
             ))}
-          </Reveal>
+          </div>
         </div>
       </section>
 
-      <Cta />
     </>
   );
 }

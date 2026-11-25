@@ -118,7 +118,7 @@ export default function Conversation({ preset, campaign = "website" }: { preset?
         <div className="bubble bubble--wp">
           {returning && stage === "contact"
             ? `Welcome back, ${lead.first_name}. Confirm your details and we'll pick up from there.`
-            : "Hi, I'm Willowpack's quote assistant. Tell me a little about you and your product and I'll put together pricing in a couple of minutes. A packaging specialist reviews every quote."}
+            : "Hi, I'm Willowpack's quote assistant. Start with your details, then the product, and I'll price it in a couple of minutes."}
         </div>
 
         {stage !== "contact" && (
@@ -194,15 +194,14 @@ export default function Conversation({ preset, campaign = "website" }: { preset?
       <div className="convo__input">
         {stage === "contact" && (
           <form className="convo__contact" onSubmit={submitContact}>
-            <input required autoComplete="given-name" placeholder="First name" value={lead.first_name} onChange={(e) => setLead({ ...lead, first_name: e.target.value })} />
-            <input autoComplete="family-name" placeholder="Last name" value={lead.last_name} onChange={(e) => setLead({ ...lead, last_name: e.target.value })} />
-            <input required autoComplete="organization" placeholder="Company" value={lead.company} onChange={(e) => setLead({ ...lead, company: e.target.value })} />
-            <input required type="email" autoComplete="email" placeholder="Work email" value={lead.email} onChange={(e) => setLead({ ...lead, email: e.target.value })} />
-            <input className="span2" type="tel" autoComplete="tel" placeholder="Phone (optional)" value={lead.phone} onChange={(e) => setLead({ ...lead, phone: e.target.value })} />
+            <label>First name<input required autoComplete="given-name" value={lead.first_name} onChange={(e) => setLead({ ...lead, first_name: e.target.value })} /></label>
+            <label>Last name<input autoComplete="family-name" value={lead.last_name} onChange={(e) => setLead({ ...lead, last_name: e.target.value })} /></label>
+            <label>Company<input required autoComplete="organization" value={lead.company} onChange={(e) => setLead({ ...lead, company: e.target.value })} /></label>
+            <label>Work email<input required type="email" autoComplete="email" value={lead.email} onChange={(e) => setLead({ ...lead, email: e.target.value })} /></label>
+            <label className="span2">Phone (optional)<input type="tel" autoComplete="tel" value={lead.phone} onChange={(e) => setLead({ ...lead, phone: e.target.value })} /></label>
             <button className="btn btn--solid span2" type="submit" disabled={!nameOk}>
               Continue <span aria-hidden>→</span>
             </button>
-            <p className="convo__fine span2">No account needed. We only use your details to follow up on this quote.</p>
           </form>
         )}
 
