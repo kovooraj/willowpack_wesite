@@ -1575,3 +1575,6 @@ html.m-enter .hero[data-enter] > .hero__bg { transform: scale(1.06); animation: 
   .products-sec .head-block .lede { font-size: 1rem; }
   #customers { min-height: 200svh; }
 }
+
+/* hero film: let the machinery read at the top; keep the text area dark enough to read */
+.hero::after { background: linear-gradient(180deg, rgba(20,17,14,.18) 0%, rgba(20,17,14,.28) 28%, rgba(20,17,14,.52) 45%, rgba(20,17,14,.9) 100%); }

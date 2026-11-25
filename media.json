@@ -1,5 +1,3 @@
 {
-  "_note": "All media is committed in public/media. To add an ElevenLabs render, list \"name.ext\": \"<signed url>\" here and push: the Persist media action downloads it into public/media and commits it before the link expires.",
-  "hero-a-raw.mp4": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/hKuYV4kZQS2K84bh4QmY/jKyHdggBKh9FFmxHFNIV/content.mp4?Expires=1795586400&KeyName=assets-cdn-key-1&Signature=8vltyXbLEn8u_FoFrWQa0FW-JD4=",
-  "hero-b-raw.mp4": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/MTKAKIStyDFAQ1ypAd6V/HTWsnKiGQ6lapahNYUgy/content.mp4?Expires=1795586400&KeyName=assets-cdn-key-1&Signature=fwOoGNlnQxqVC3b4MucFiYl3Mvc="
+  "_note": "All media is committed in public/media. To add an ElevenLabs render, list \"name.ext\": \"<signed url>\" here and push: the Persist media action downloads it into public/media and commits it before the link expires."
 }
