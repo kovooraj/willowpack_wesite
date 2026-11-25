@@ -1,4 +1,4 @@
-import QuoteBox from "./QuoteBox";
+import Conversation from "./Conversation";
 import { Reveal } from "./Chrome";
 
 export default function Cta() {
@@ -15,7 +15,9 @@ export default function Cta() {
         </Reveal>
         <Reveal>
           <p>Describe your project and get price breaks in seconds. A packaging specialist finalizes every quote.</p>
-          <QuoteBox campaign="website-cta" />
+          <div className="convo-frame convo-frame--cta">
+            <Conversation campaign="website-cta" />
+          </div>
         </Reveal>
       </div>
     </section>
