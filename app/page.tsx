@@ -3,6 +3,7 @@ import { proof } from "@/lib/site";
 import { TalkButton } from "@/components/Talk";
 import { LoopVideo } from "@/components/Media";
 import ProductGrid from "@/components/ProductGrid";
+import HeroReel from "@/components/HeroReel";
 
 /* tasteskill plan
    kind: product (site-kind other). Main action: Get a quote.
@@ -68,6 +69,7 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          <HeroReel />
           </div>
         </div>
       </section>

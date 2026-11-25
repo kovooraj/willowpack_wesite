@@ -1,3 +1,8 @@
 {
-  "_note": "All media is committed in public/media. To add an ElevenLabs render, list \"name.ext\": \"<signed url>\" here and push: the Persist media action downloads it into public/media and commits it before the link expires."
+  "_note": "All media is committed in public/media. To add an ElevenLabs render, list \"name.ext\": \"<signed url>\" here and push: the Persist media action downloads it into public/media and commits it before the link expires.",
+  "reel-1-raw.mp4": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/39xt2GHGUfERpAohZk1e/MZuXCzw3hGlnNMxYWewh/content.mp4?Expires=1795590000&KeyName=assets-cdn-key-1&Signature=CsWJ8fujluTzSZoEv1ZWPaWSNG8=",
+  "reel-2-raw.mp4": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/l9tWQr4wNAaV4NebEhY7/qlvBRb5cd4zkwBf9ron3/content.mp4?Expires=1795590000&KeyName=assets-cdn-key-1&Signature=oTmSJG_PEfJzgjUouNVywIjBEZo=",
+  "reel-3-raw.mp4": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/fGiGGC3O0qKtiG5CJBqZ/jIH6YE3kR6j85wGLVbUa/content.mp4?Expires=1795590000&KeyName=assets-cdn-key-1&Signature=Dr5ALQyr0Td6Je9J4dAPYW5cm5s=",
+  "reel-4-raw.mp4": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/rS1VyY0EG8cUJ5X8VkeZ/MzW5God1delRXfuBNBdl/content.mp4?Expires=1795590000&KeyName=assets-cdn-key-1&Signature=SWxUezO53Brm7zXFDZAurA4wais=",
+  "reel-5-raw.mp4": "https://elevenlabsusercontent.com/database/workspace/db2bf8415879499da8544c74a1b3f046/content_generation/6IgUdu5IoiAwUlnVJHtv/2UtbUxhgv6aNl60S9e3I/content.mp4?Expires=1795590000&KeyName=assets-cdn-key-1&Signature=ahFH6dHj9f81cYU-YJzH7jMyrG4="
 }
